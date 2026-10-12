@@ -1,68 +1,55 @@
 // script.js
 //
-// This page scrolls as one long page now (no tabs). The only real
-// interactivity is: clicking a skill sticker clears the demo panel
-// and calls one specific demo function. Each demo is self-contained
-// so you can read, edit, or replace just one without touching the others.
+// One long scrolling page. Clicking a skill card runs one self-contained demo
+// inside the demo panel. Each demo is its own function, so you can read, edit,
+// or replace just one without touching the others.
 
 const demoPanel = document.getElementById("demoPanel");
 const demoBody = document.getElementById("demoBody");
 const demoTitle = document.getElementById("demoTitle");
 const closeDemo = document.getElementById("closeDemo");
 
+// Every time a demo starts (or the panel closes) this number goes up.
+// Old animations check it and stop themselves, so demos never overlap.
+let demoToken = 0;
+
 // ---------- Dark / light theme toggle ----------
-// Saved with localStorage so it's remembered next time this person
-// visits — same technique as the favorites feature in the recipe picker.
+// The saved theme is applied by a tiny script in <head> (no flash).
+// This part only handles the button.
 
 const THEME_KEY = "digital-resume:theme";
+const root = document.documentElement;
 const themeToggle = document.getElementById("themeToggle");
 
 function applyTheme(theme) {
-  document.body.dataset.theme = theme;
+  root.dataset.theme = theme;
   themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+  themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
 }
 
-function loadSavedTheme() {
-  try {
-    return localStorage.getItem(THEME_KEY);
-  } catch (err) {
-    return null;
-  }
-}
+applyTheme(root.dataset.theme === "dark" ? "dark" : "light");
 
-function saveTheme(theme) {
+themeToggle.addEventListener("click", () => {
+  const next = root.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(next);
   try {
-    localStorage.setItem(THEME_KEY, theme);
+    localStorage.setItem(THEME_KEY, next);
   } catch (err) {
     console.error("Could not save theme:", err);
   }
-}
-
-const savedTheme = loadSavedTheme();
-const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
-
-themeToggle.addEventListener("click", () => {
-  const next = document.body.dataset.theme === "dark" ? "light" : "dark";
-  applyTheme(next);
-  saveTheme(next);
 });
 
-// ---------- Downloadable PDF ----------
-// There's no PDF library here — window.print() opens the browser's normal
-// print dialog, and "Save as PDF" is a built-in destination in every modern
-// browser. The @media print rules in style.css control what that looks like.
+// ---------- Save as PDF ----------
+// window.print() opens the browser's print dialog, and "Save as PDF" is a
+// built-in destination. The @media print rules in style.css shape the result.
 
-document.getElementById("downloadPdf").addEventListener("click", () => {
-  window.print();
+document.querySelectorAll("[data-print]").forEach((btn) => {
+  btn.addEventListener("click", () => window.print());
 });
 
 // ---------- Contact form ----------
-// No backend here, so "sending" the message means opening the person's own
-// email app with everything pre-filled via a mailto: link. That's a real,
-// working option for a static site with no server — just not fully
-// automatic. (See the README for a no-backend alternative using Formspree
-// if you want the message to arrive without opening an email app.)
+// No backend, so "sending" opens the visitor's email app with everything
+// pre-filled via a mailto: link. (See the README for a Formspree alternative.)
 
 const contactForm = document.getElementById("contactForm");
 const formNote = document.getElementById("formNote");
@@ -79,51 +66,35 @@ contactForm.addEventListener("submit", (e) => {
   const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
 
   window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-  formNote.textContent = "Binuksan ang iyong email app. Kumpletuhin na lang ang pagpapadala doon.";
+  formNote.textContent = "Your email app should be open now. Press send there to finish. No email app? Use the Copy email button.";
 });
 
-// ---------- Skill growth bars ----------
-// Just a rough, honest self-rating per skill (0-100). Edit these numbers
-// yourself as you improve — this isn't meant to be precise, just directional.
+// ---------- Skill level dots ----------
+// Each .skill-level in index.html has data-level="1-5" and a text label.
+// Edit those two things in the HTML as you improve.
 
-const skillLevels = [
-  { label: "HTML", value: 85 },
-  { label: "CSS Animation", value: 70 },
-  { label: "JavaScript", value: 65 },
-  { label: "Responsive Design", value: 60 },
-  { label: "Git & GitHub", value: 55 },
-  { label: "Problem Solving", value: 60 },
-];
-
-function renderSkillBars() {
-  const container = document.getElementById("skillBars");
-  container.innerHTML = "";
-
-  skillLevels.forEach(({ label, value }) => {
-    const row = document.createElement("div");
-    row.className = "skill-bar-row";
-    row.innerHTML = `
-      <span class="skill-bar-label">${label}</span>
-      <span class="skill-bar-track">
-        <span class="skill-bar-fill" style="width: 0%"></span>
-      </span>
-      <span class="skill-bar-value">${value}%</span>
-    `;
-    container.appendChild(row);
-
-    // Animate in after a tick, so the width transition actually plays.
-    requestAnimationFrame(() => {
-      row.querySelector(".skill-bar-fill").style.width = `${value}%`;
-    });
-  });
-}
-
-renderSkillBars();
+document.querySelectorAll(".skill-level").forEach((el) => {
+  const level = Number(el.dataset.level) || 0;
+  const dots = document.createElement("span");
+  dots.className = "dots";
+  dots.setAttribute("aria-hidden", "true");
+  for (let i = 1; i <= 5; i++) {
+    const dot = document.createElement("i");
+    if (i <= level) dot.className = "on";
+    dots.appendChild(dot);
+  }
+  el.prepend(dots);
+});
 
 // ---------- Live GitHub stats ----------
-// Uses GitHub's public API (no auth needed, ~60 requests/hour limit — plenty
-// for a personal site). Update the data-username attribute on #githubStats
-// in index.html to your real GitHub username.
+// GitHub's public API, no login needed (~60 requests/hour per visitor).
+// Change data-username on #githubStats in index.html if your username changes.
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
 
 async function loadGitHubStats() {
   const section = document.getElementById("githubStats");
@@ -145,15 +116,15 @@ async function loadGitHubStats() {
 
     grid.innerHTML = `
       <div class="github-stat">
-        <span class="github-stat-value">${user.public_repos}</span>
+        <span class="github-stat-value">${escapeHtml(user.public_repos)}</span>
         <span class="github-stat-label">Public repos</span>
       </div>
       <div class="github-stat">
-        <span class="github-stat-value">${user.followers}</span>
+        <span class="github-stat-value">${escapeHtml(user.followers)}</span>
         <span class="github-stat-label">Followers</span>
       </div>
       <div class="github-stat">
-        <span class="github-stat-value">${latestRepo ? latestRepo.name : "—"}</span>
+        <span class="github-stat-value">${latestRepo ? escapeHtml(latestRepo.name) : "—"}</span>
         <span class="github-stat-label">Latest repo</span>
       </div>
     `;
@@ -162,12 +133,8 @@ async function loadGitHubStats() {
     skeleton.hidden = true;
     grid.hidden = false;
   } catch (err) {
-    status.textContent =
-      `Couldn't load GitHub data for "${username}". ` +
-      `Double check the data-username attribute on #githubStats.`;
-    skeleton.hidden = true;
     // Don't show an error on a public resume: hide the whole card instead.
-    // The reason is still in the console (F12) so you can fix it.
+    skeleton.hidden = true;
     section.hidden = true;
     console.error("GitHub stats failed:", err);
   }
@@ -176,18 +143,21 @@ async function loadGitHubStats() {
 loadGitHubStats();
 
 // ---------- Easter egg ----------
-// Type "ojt" anywhere on the page.
+// Type "ojt" anywhere on the page (not while typing in the contact form).
 
 let typedBuffer = "";
 const secretWord = "ojt";
 
 const easterToast = document.createElement("div");
 easterToast.className = "easter-toast";
+easterToast.setAttribute("role", "status");
 easterToast.textContent = "🎉 Sana all matanggap sa OJT nila! Ikaw kasama.";
 document.body.appendChild(easterToast);
 
 window.addEventListener("keydown", (e) => {
-  if (e.key.length > 1) return; // ignore Shift, Enter, arrows, etc.
+  if (e.key.length > 1 || e.ctrlKey || e.metaKey || e.altKey) return;
+  const tag = e.target && e.target.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
 
   typedBuffer = (typedBuffer + e.key.toLowerCase()).slice(-secretWord.length);
 
@@ -196,6 +166,8 @@ window.addEventListener("keydown", (e) => {
     setTimeout(() => easterToast.classList.remove("show"), 3200);
   }
 });
+
+// ---------- Skill demos ----------
 
 const demoRunners = {
   html: runHtmlDemo,
@@ -211,7 +183,7 @@ const skillLabels = {
   css: "CSS Animation — watch it run",
   js: "JavaScript — try it yourself",
   responsive: "Responsive Design — drag the slider",
-  git: "Git & GitHub — like a real terminal",
+  git: "Git & GitHub — my real commits",
   sort: "Problem Solving — bubble sort in action",
 };
 
@@ -222,49 +194,29 @@ document.getElementById("skillsGrid").addEventListener("click", (e) => {
   document.querySelectorAll(".skill-card").forEach((el) => el.classList.remove("active"));
   item.classList.add("active");
 
+  const token = ++demoToken;
   demoPanel.hidden = false;
   demoTitle.textContent = skillLabels[item.dataset.skill] || "Try it";
   demoBody.innerHTML = "";
 
   const runner = demoRunners[item.dataset.skill];
-  if (runner) runner();
+  if (runner) runner(token);
 
   demoPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
 
 closeDemo.addEventListener("click", () => {
+  demoToken++; // stops any animation that is still running
   demoPanel.hidden = true;
   document.querySelectorAll(".skill-card").forEach((el) => el.classList.remove("active"));
 });
 
-// ---------- Project filters ----------
-// Tag-based filtering: each project card carries a data-tags attribute,
-// and clicking a chip shows only matching cards ("all" shows everything).
-
-const projectFilters = document.getElementById("projectFilters");
-const projectCards = document.querySelectorAll("#projectsGrid .project-card");
-
-projectFilters.addEventListener("click", (e) => {
-  const chip = e.target.closest(".filter-chip");
-  if (!chip) return;
-
-  projectFilters.querySelectorAll(".filter-chip").forEach((el) => el.classList.remove("active"));
-  chip.classList.add("active");
-
-  const filter = chip.dataset.filter;
-  projectCards.forEach((card) => {
-    const tags = card.dataset.tags || "";
-    card.style.display = filter === "all" || tags.includes(filter) ? "" : "none";
-  });
-});
-
-// Small helper: types text into an element one character at a time,
-// used by the HTML and Git demos to feel like a live terminal.
-function typeLines(container, lines, lineClass = "term-line", speed = 18) {
+// Types text into an element one character at a time (HTML and Git demos).
+function typeLines(container, lines, lineClass = "term-line", speed = 18, token = demoToken) {
   let lineIndex = 0;
 
   function typeNextLine() {
-    if (lineIndex >= lines.length) return;
+    if (token !== demoToken || lineIndex >= lines.length) return;
 
     const p = document.createElement("p");
     p.className = lineClass;
@@ -274,8 +226,12 @@ function typeLines(container, lines, lineClass = "term-line", speed = 18) {
     let charIndex = 0;
 
     const interval = setInterval(() => {
-      p.textContent = text.slice(0, charIndex + 1);
+      if (token !== demoToken) {
+        clearInterval(interval);
+        return;
+      }
       charIndex++;
+      p.textContent = text.slice(0, charIndex);
       if (charIndex >= text.length) {
         clearInterval(interval);
         lineIndex++;
@@ -288,14 +244,14 @@ function typeLines(container, lines, lineClass = "term-line", speed = 18) {
 }
 
 // --- HTML demo: types out a small nested markup snippet ---
-function runHtmlDemo() {
+function runHtmlDemo(token) {
   const lines = [
     "<section class=\"card\">",
     "  <h2>Hello, recruiter!</h2>",
     "  <p>Semantic markup, done on purpose.</p>",
     "</section>",
   ];
-  typeLines(demoBody, lines, "term-line dim", 14);
+  typeLines(demoBody, lines, "term-line", 14, token);
 }
 
 // --- CSS demo: plays a small keyframe animation on a box ---
@@ -306,10 +262,9 @@ function runCssDemo() {
 
   const note = document.createElement("p");
   note.className = "term-line dim";
-  note.textContent = "// @keyframes moving box + color + border-radius shift";
+  note.textContent = "// @keyframes: move + rotate + color + border-radius shift";
   demoBody.appendChild(note);
 
-  // Restart the animation every time this demo runs.
   requestAnimationFrame(() => box.classList.add("animating"));
 }
 
@@ -320,16 +275,16 @@ function runJsDemo() {
   const row = document.createElement("div");
   row.className = "counter-row";
   row.innerHTML = `
-    <button class="counter-btn" id="decBtn">−</button>
-    <span class="counter-value" id="countValue">0</span>
-    <button class="counter-btn" id="incBtn">+</button>
+    <button class="counter-btn" id="decBtn" type="button" aria-label="Decrease">−</button>
+    <span class="counter-value" id="countValue" aria-live="polite">0</span>
+    <button class="counter-btn" id="incBtn" type="button" aria-label="Increase">+</button>
   `;
   demoBody.appendChild(row);
 
   const note = document.createElement("p");
   note.className = "term-line dim";
-  note.style.marginTop = "0.8rem";
-  note.textContent = "// real event listeners, real state — try clicking";
+  note.style.marginTop = "0.9rem";
+  note.textContent = "// real event listeners, real state. Try clicking.";
   demoBody.appendChild(note);
 
   const countValue = row.querySelector("#countValue");
@@ -347,13 +302,13 @@ function runJsDemo() {
 function runResponsiveDemo() {
   const wrap = document.createElement("div");
   wrap.innerHTML = `
-    <input type="range" class="frame-slider" id="frameSlider" min="220" max="600" value="600">
+    <input type="range" class="frame-slider" id="frameSlider" min="220" max="600" value="600" aria-label="Preview width">
     <div class="frame-preview" id="framePreview" style="width: 600px;">
       <div class="frame-card">Card A</div>
       <div class="frame-card">Card B</div>
       <div class="frame-card">Card C</div>
     </div>
-    <p class="term-line dim" style="margin-top:0.8rem;">// drag to shrink the viewport — flexbox reflows automatically</p>
+    <p class="term-line dim" style="margin-top:0.9rem;">// drag to shrink the viewport. Flexbox reflows automatically.</p>
   `;
   demoBody.appendChild(wrap);
 
@@ -364,20 +319,46 @@ function runResponsiveDemo() {
   });
 }
 
-// --- Git demo: types out a fake but plausible commit log ---
-function runGitDemo() {
-  const lines = [
-    "$ git log --oneline",
-    "a3f9c21 Add responsive nav for mobile",
-    "7e21b3d Fix overflow bug on small screens",
-    "2b6d4aa Add dark mode toggle",
-    "1c9f0aa Initial commit",
-  ];
-  typeLines(demoBody, lines, "term-line", 16);
+// --- Git demo: shows the latest real commits from this site's repo ---
+// Falls back to a clearly-labelled sample if GitHub can't be reached.
+async function runGitDemo(token) {
+  const loading = document.createElement("p");
+  loading.className = "term-line dim";
+  loading.textContent = "Fetching my latest commits from GitHub…";
+  demoBody.appendChild(loading);
+
+  const username = document.getElementById("githubStats").dataset.username;
+  let commits = null;
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${username}/Digital-Resume/commits?per_page=4`);
+    if (!res.ok) throw new Error(`Commits fetch failed: ${res.status}`);
+    const data = await res.json();
+    commits = data.map((c) => `${c.sha.slice(0, 7)} ${c.commit.message.split("\n")[0].slice(0, 60)}`);
+    if (!commits.length) commits = null;
+  } catch (err) {
+    console.error("Git demo fetch failed:", err);
+  }
+
+  if (token !== demoToken) return; // visitor clicked something else meanwhile
+  demoBody.innerHTML = "";
+
+  const lines = commits
+    ? ["$ git log --oneline", ...commits, "// pulled live from my GitHub repo"]
+    : [
+        "$ git log --oneline",
+        "a3f9c21 Add responsive nav for mobile",
+        "7e21b3d Fix overflow bug on small screens",
+        "2b6d4aa Add dark mode toggle",
+        "1c9f0aa Initial commit",
+        "// sample output: couldn't reach GitHub right now",
+      ];
+
+  typeLines(demoBody, lines, "term-line", 14, token);
 }
 
 // --- Problem solving demo: a small bubble sort visualization ---
-function runSortDemo() {
+function runSortDemo(token) {
   const values = [5, 2, 8, 1, 9, 3, 7];
 
   const wrap = document.createElement("div");
@@ -387,6 +368,7 @@ function runSortDemo() {
 
   const btn = document.createElement("button");
   btn.className = "run-btn";
+  btn.type = "button";
   btn.textContent = "Run bubble sort";
   wrap.appendChild(btn);
 
@@ -397,7 +379,8 @@ function runSortDemo() {
     arr.forEach((val, i) => {
       const bar = document.createElement("div");
       bar.className = "sort-bar";
-      bar.style.height = `${val * 10}px`;
+      bar.style.height = `${val * 10 + 14}px`;
+      bar.textContent = val;
       if (i >= sortedFrom) bar.classList.add("sorted");
       if (activeIndices.includes(i)) bar.classList.add("comparing");
       barsEl.appendChild(bar);
@@ -412,6 +395,8 @@ function runSortDemo() {
     let i = 0, j = 0;
 
     function step() {
+      if (token !== demoToken) return; // demo closed or replaced
+
       if (i >= arr.length - 1) {
         renderBars(arr, [], 0);
         btn.disabled = false;
@@ -432,26 +417,26 @@ function runSortDemo() {
       }
 
       j++;
-      setTimeout(step, 220);
+      setTimeout(step, 260);
     }
 
     step();
   });
 }
 
-
 // ---------- Certificates: hide "Verify" until a real link is added ----------
 document.querySelectorAll(".cert-verify").forEach((link) => {
   if (link.getAttribute("href") === "#") link.hidden = true;
 });
 
-// ---------- Project screenshots: remove the slot if the image is missing ----------
+// ---------- Project screenshots ----------
+// Each project has a colored cover with an emoji. If the screenshot loads it
+// covers the emoji; if it's missing, we just drop the broken image.
 document.querySelectorAll(".project-shot img").forEach((img) => {
-  const removeShot = () => img.closest(".project-shot").remove();
-  img.addEventListener("error", removeShot);
-  if (img.complete && img.naturalWidth === 0) removeShot();
+  const dropImg = () => img.remove();
+  img.addEventListener("error", dropImg);
+  if (img.complete && img.naturalWidth === 0) dropImg();
 });
-
 
 // ---------- Copy email button ----------
 const copyBtn = document.getElementById("copyEmail");
@@ -467,7 +452,6 @@ copyBtn.addEventListener("click", async () => {
   setTimeout(() => (copyBtn.textContent = "Copy email"), 2000);
 });
 
-
 // ---------- Hide any link that still has a placeholder "#" ----------
 // Add data-hide-if-empty to a link; until you paste a real URL it stays hidden.
 document.querySelectorAll("a[data-hide-if-empty]").forEach((link) => {
@@ -480,4 +464,28 @@ if (heroImg) {
   const dropPhoto = () => heroImg.remove();
   heroImg.addEventListener("error", dropPhoto);
   if (heroImg.complete && heroImg.naturalWidth === 0) dropPhoto();
+}
+
+// ---------- Highlight the current section in the nav ----------
+const navLinks = [...document.querySelectorAll("#siteNav a")];
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((link) => {
+          if (link.getAttribute("href") === `#${entry.target.id}`) {
+            link.setAttribute("aria-current", "true");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+  navLinks.forEach((link) => {
+    const section = document.getElementById(link.getAttribute("href").slice(1));
+    if (section) observer.observe(section);
+  });
 }
