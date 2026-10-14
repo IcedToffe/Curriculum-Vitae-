@@ -40,7 +40,12 @@ html[data-theme="dark"] {
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Scale everything up on very wide screens (4K, ultrawide, or browser zoomed out)
+     so the page never looks tiny. Normal screens stay at 16px. */
+  font-size: max(16px, 0.8vw);
+}
 
 body {
   margin: 0;
