@@ -13,6 +13,14 @@
 <meta property="og:url" content="https://icedtoffe.github.io/digital-resume/">
 <!-- og:image needs a real hosted image (1200x630px works best) — add one once you have a screenshot or banner -->
 
+<!-- Apply the saved theme before the page paints (prevents a light/dark flash) -->
+<script>
+  try {
+    var saved = localStorage.getItem("digital-resume:theme");
+    if (saved === "dark" || saved === "light") document.documentElement.dataset.theme = saved;
+  } catch (e) {}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,153 +28,225 @@
 </head>
 <body>
 
-  <div class="floating-controls">
-    <button class="icon-btn" id="themeToggle" aria-label="Toggle dark/light theme">🌙</button>
-    <button class="icon-btn" id="downloadPdf" aria-label="Download as PDF">Download PDF</button>
-  </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Back to top">
+        <span class="brand-mark">DK</span>
+        <span class="brand-name">Dharel Khin</span>
+      </a>
 
-  <nav class="top-nav" aria-label="Page sections">
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#certifications">Certificates</a>
-    <a href="#contact">Contact</a>
-  </nav>
+      <nav class="site-nav" id="siteNav" aria-label="Page sections">
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certificates</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-  <main>
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark/light theme">🌙</button>
+        <button class="icon-btn" type="button" data-print>Download PDF</button>
+      </div>
+    </div>
+  </header>
 
-    <section class="sticker--hero">
-      <figure class="hero-photo" data-initials="DK">
-        <!-- Save your picture as photo.jpg next to index.html. If it's missing, the initials show instead. -->
-        <img src="photo.jpg" alt="Photo of Dharel Khin Melegrito">
-      </figure>
+  <main class="wrap" id="top">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
       <div class="hero-text">
+        <span class="status-badge" id="statusBadge" data-status="open">
+          <span class="dot"></span> Open for OJT — Aug 2026
+        </span>
         <h1>Hi, I'm Dharel Khin Melegrito</h1>
         <p class="hero-role">4th Year IT Student</p>
         <p class="hero-tagline">Looking for an online OJT. Here's what I can actually do, not just a list of words.</p>
-        <span class="status-badge" id="statusBadge" data-status="open">🟢 Open for OJT — Aug 2026</span>
+        <div class="cta-row">
+          <a class="btn btn--solid" href="#skills">Try my skills</a>
+          <a class="btn btn--ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <figure class="hero-photo" data-initials="DK">
+          <!-- Save your picture as photo.jpg next to index.html. If it's missing, the initials show instead. -->
+          <img src="photo.jpg" alt="Photo of Dharel Khin Melegrito">
+        </figure>
+        <span class="sticker-chip c1">HTML</span>
+        <span class="sticker-chip c2">CSS</span>
+        <span class="sticker-chip c3">JS</span>
+        <span class="sticker-chip c4">learning React</span>
       </div>
     </section>
 
-    <div class="intro-grid">
-    <section class="content-card">
-      <h2>About me</h2>
-      <p class="body-text">
-        I'm a 4th-year IT student looking for an online OJT starting August 2026.
-        So far I've built a Filipino "would you rather" game, a recipe picker
-        powered by my own JSON dataset, and this site. Every skill below is
-        clickable, so you can see it run instead of taking my word for it.
-      </p>
-    </section>
+    <!-- ===== At a glance ===== -->
+    <dl class="facts">
+      <div class="fact"><dt>Year</dt><dd>4th-year IT</dd></div>
+      <div class="fact"><dt>Looking for</dt><dd>Online OJT</dd></div>
+      <div class="fact"><dt>Start date</dt><dd>August 2026</dd></div>
+      <div class="fact"><dt>Learning now</dt><dd>React</dd></div>
+    </dl>
 
-    <section class="content-card">
-      <h2>Currently learning</h2>
-      <p class="body-text">
-        I'm working through <strong>React</strong> right now, because I want to
-        understand how bigger apps get built once a project outgrows plain
-        HTML/CSS/JS. I don't know everything yet but I know how to learn,
-        and this whole site is proof of that.
-      </p>
-    </section>
+    <!-- ===== About + learning ===== -->
+    <div class="two-col">
+      <section class="card card--coral">
+        <h2 class="card-title">About me</h2>
+        <p class="body-text">
+          I'm a 4th-year IT student looking for an online OJT starting August 2026.
+          So far I've built a Filipino "would you rather" game, a recipe picker
+          powered by my own JSON dataset, and this site. Every skill below is
+          clickable, so you can see it run instead of taking my word for it.
+        </p>
+      </section>
+
+      <section class="card card--sky">
+        <h2 class="card-title">Currently learning</h2>
+        <p class="body-text">
+          I'm working through <strong>React</strong> right now, because I want to
+          understand how bigger apps get built once a project outgrows plain
+          HTML/CSS/JS. I don't know everything yet but I know how to learn,
+          and this whole site is proof of that.
+        </p>
+      </section>
     </div>
 
-    <section class="skills-section" id="skills">
+    <!-- ===== Skills ===== -->
+    <section id="skills">
       <h2 class="section-title">Skills — click one</h2>
+      <p class="section-sub">Each card runs a real, working demo right on this page. The dots are my honest self-rating.</p>
 
       <div class="skills-grid" id="skillsGrid">
-        <button class="skill-card" data-skill="html" data-accent="coral">HTML</button>
-        <button class="skill-card" data-skill="css" data-accent="sky">CSS Animation</button>
-        <button class="skill-card" data-skill="js" data-accent="sunny">JavaScript</button>
-        <button class="skill-card" data-skill="responsive" data-accent="grass">Responsive Design</button>
-        <button class="skill-card" data-skill="git" data-accent="coral">Git &amp; GitHub</button>
-        <button class="skill-card" data-skill="sort" data-accent="sky">Problem Solving</button>
+        <button class="skill-card" type="button" data-skill="html" data-accent="coral">
+          <span class="skill-name">HTML</span>
+          <span class="skill-level" data-level="4">Comfortable</span>
+          <span class="skill-cta">Run demo →</span>
+        </button>
+
+        <button class="skill-card" type="button" data-skill="css" data-accent="sky">
+          <span class="skill-name">CSS Animation</span>
+          <span class="skill-level" data-level="3">Getting there</span>
+          <span class="skill-cta">Run demo →</span>
+        </button>
+
+        <button class="skill-card" type="button" data-skill="js" data-accent="sunny">
+          <span class="skill-name">JavaScript</span>
+          <span class="skill-level" data-level="3">Getting there</span>
+          <span class="skill-cta">Run demo →</span>
+        </button>
+
+        <button class="skill-card" type="button" data-skill="responsive" data-accent="grass">
+          <span class="skill-name">Responsive Design</span>
+          <span class="skill-level" data-level="4">Comfortable</span>
+          <span class="skill-cta">Run demo →</span>
+        </button>
+
+        <button class="skill-card" type="button" data-skill="git" data-accent="coral">
+          <span class="skill-name">Git &amp; GitHub</span>
+          <span class="skill-level" data-level="3">Getting there</span>
+          <span class="skill-cta">Run demo →</span>
+        </button>
+
+        <button class="skill-card" type="button" data-skill="sort" data-accent="sky">
+          <span class="skill-name">Problem Solving</span>
+          <span class="skill-level" data-level="3">Getting there</span>
+          <span class="skill-cta">Run demo →</span>
+        </button>
       </div>
 
       <div class="demo-panel" id="demoPanel" hidden>
         <div class="demo-header">
-          <span id="demoTitle">Try it</span>
-          <button id="closeDemo" aria-label="Close">✕</button>
+          <span class="demo-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="demo-title" id="demoTitle">Try it</span>
+          <button id="closeDemo" type="button" aria-label="Close">✕</button>
         </div>
         <div class="demo-body" id="demoBody"></div>
       </div>
-
-      <div class="skill-bars" id="skillBars"></div>
     </section>
 
-    <section class="content-card" id="githubStats" data-username="IcedToffe">
-      <h2>GitHub Activity</h2>
-      <p class="github-status" id="githubStatus">Loading data from GitHub…</p>
-      <div class="github-skeleton" id="githubSkeleton">
-        <div class="skeleton-block"></div>
-        <div class="skeleton-block"></div>
-        <div class="skeleton-block"></div>
+    <!-- ===== GitHub ===== -->
+    <section class="card github-card" id="githubStats" data-username="IcedToffe">
+      <div>
+        <h2 class="card-title">GitHub Activity</h2>
+        <p class="github-status" id="githubStatus">Loading data from GitHub…</p>
       </div>
-      <div class="github-grid" id="githubGrid" hidden></div>
+      <div>
+        <div class="github-skeleton" id="githubSkeleton">
+          <div class="skeleton-block"></div>
+          <div class="skeleton-block"></div>
+          <div class="skeleton-block"></div>
+        </div>
+        <div class="github-grid" id="githubGrid" hidden></div>
+      </div>
     </section>
 
-    <section class="projects-section" id="projects">
+    <!-- ===== Projects ===== -->
+    <section id="projects">
       <h2 class="section-title">Projects</h2>
-
-      <div class="project-filters" id="projectFilters">
-        <button class="filter-chip active" data-filter="all">All</button>
-        <button class="filter-chip" data-filter="game">Games</button>
-        <button class="filter-chip" data-filter="data">Data / JSON</button>
-        <button class="filter-chip" data-filter="site">This site</button>
-      </div>
+      <p class="section-sub">Three things I've built. The last one is this page.</p>
 
       <div class="projects-grid" id="projectsGrid">
-        <article class="project-card" data-tags="game">
-          <figure class="project-shot">
+        <article class="project-card">
+          <figure class="project-shot" style="--cover: var(--coral);">
+            <span class="cover-emoji" aria-hidden="true">🎲</span>
             <img src="screenshots/alin-ang-pipiliin-mo.png" alt="Screenshot of the Alin Ang Pipiliin Mo game" loading="lazy">
           </figure>
-          <h3>Alin Ang Pipiliin Mo?</h3>
-          <p class="body-text small">A Filipino "would you rather" game with a hidden bonus round and reactions for every choice.</p>
-          <div class="project-tags">
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">Game</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://github.com/IcedToffe/Alin-ang-pipiliin-mo-" data-hide-if-empty>View on GitHub →</a>
-            <a class="project-link" href="https://alin-ang-pipiliin-mo.vercel.app/" data-hide-if-empty>Live demo →</a>
+          <div class="project-body">
+            <h3>Alin Ang Pipiliin Mo?</h3>
+            <p class="body-text small">A Filipino "would you rather" game with a hidden bonus round and reactions for every choice.</p>
+            <div class="project-tags">
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">Game</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/IcedToffe/Alin-ang-pipiliin-mo-" data-hide-if-empty>View on GitHub →</a>
+              <a class="project-link" href="https://alin-ang-pipiliin-mo.vercel.app/" data-hide-if-empty>Live demo →</a>
+            </div>
           </div>
         </article>
 
-        <article class="project-card" data-tags="data">
-          <figure class="project-shot">
+        <article class="project-card">
+          <figure class="project-shot" style="--cover: var(--sky);">
+            <span class="cover-emoji" aria-hidden="true">🍲</span>
             <img src="screenshots/anong-lutuin-ngayon.png" alt="Screenshot of the Anong Lutuin Ngayon recipe picker" loading="lazy">
           </figure>
-          <h3>Anong Lutuin Ngayon?</h3>
-          <p class="body-text small">A random Pinoy recipe picker with search, filters, and favorites — from my own JSON dataset.</p>
-          <div class="project-tags">
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">JSON</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="#" data-hide-if-empty>View on GitHub →</a>
-            <a class="project-link" href="#" data-hide-if-empty>Live demo →</a>
+          <div class="project-body">
+            <h3>Anong Lutuin Ngayon?</h3>
+            <p class="body-text small">A random Pinoy recipe picker with search, filters, and favorites — from my own JSON dataset.</p>
+            <div class="project-tags">
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">JSON</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="#" data-hide-if-empty>View on GitHub →</a>
+              <a class="project-link" href="#" data-hide-if-empty>Live demo →</a>
+            </div>
           </div>
         </article>
 
-        <article class="project-card" data-tags="site">
-          <figure class="project-shot">
+        <article class="project-card">
+          <figure class="project-shot" style="--cover: var(--grass);">
+            <span class="cover-emoji" aria-hidden="true">📓</span>
             <img src="screenshots/this-site.png" alt="Screenshot of this digital resume site" loading="lazy">
           </figure>
-          <h3>This site</h3>
-          <p class="body-text small">You're looking at it. Built to prove the skills above, not just list them.</p>
-          <div class="project-tags">
-            <span class="project-tag">HTML</span>
-            <span class="project-tag">CSS</span>
-            <span class="project-tag">JavaScript</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="https://github.com/IcedToffe/digital-resume" data-hide-if-empty>View on GitHub →</a>
-            <a class="project-link" href="https://icedtoffe.github.io/digital-resume/" data-hide-if-empty>Live demo →</a>
+          <div class="project-body">
+            <h3>This site</h3>
+            <p class="body-text small">You're looking at it. Built to prove the skills above, not just list them.</p>
+            <div class="project-tags">
+              <span class="project-tag">HTML</span>
+              <span class="project-tag">CSS</span>
+              <span class="project-tag">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/IcedToffe/digital-resume" data-hide-if-empty>View on GitHub →</a>
+              <a class="project-link" href="https://icedtoffe.github.io/digital-resume/" data-hide-if-empty>Live demo →</a>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="content-card" id="certifications">
-      <h2>Certifications</h2>
+    <!-- ===== Certifications ===== -->
+    <section id="certifications">
+      <h2 class="section-title">Certifications</h2>
       <ul class="cert-list" id="certList">
         <li class="cert-item">
           <div class="cert-info">
@@ -192,12 +272,16 @@
       </ul>
     </section>
 
-    <section class="content-card content-card--contact" id="contact">
-      <h2>Let's talk</h2>
-      <div class="contact-pills">
-        <a class="pill" href="https://github.com/IcedToffe">github.com/IcedToffe</a>
-        <a class="pill" href="#" data-hide-if-empty>linkedin.com/in/yourname</a>
-        <button class="pill pill-btn" type="button" id="copyEmail">Copy email</button>
+    <!-- ===== Contact ===== -->
+    <section class="contact" id="contact">
+      <div>
+        <h2 class="contact-title">Let's talk</h2>
+        <p class="contact-text">Got an OJT slot, a question, or just want to say hi? Send a message or reach me here.</p>
+        <div class="contact-pills">
+          <a class="pill" href="https://github.com/IcedToffe">github.com/IcedToffe</a>
+          <a class="pill" href="#" data-hide-if-empty>linkedin.com/in/yourname</a>
+          <button class="pill pill-btn" type="button" id="copyEmail">Copy email</button>
+        </div>
       </div>
 
       <form class="contact-form" id="contactForm" data-to="khin@gmail.com">
@@ -217,7 +301,10 @@
 
   </main>
 
-  <p class="easter-hint">psst. may lihim dito. 👀</p>
+  <footer class="site-footer">
+    <p>Built by Dharel Khin Melegrito ^_^</p>
+    <p class="easter-hint">psst. may lihim dito. 👀</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
