@@ -5,7 +5,7 @@ in stickers, matching the same personality as my other two projects. Instead
 of a static list of skills, each one is clickable. Click it and it actually
 runs, showing a live demo right on the page.
 
-**[Live demo →](#)** *(add your deployed link here once you host it)*
+**[Live demo →](#)** 
 
 ## Why I built this
 
