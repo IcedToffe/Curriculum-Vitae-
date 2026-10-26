@@ -42,30 +42,25 @@
       <div class="hero-text">
         <span class="status-badge"><span class="dot"></span> Open to opportunities</span>
         <h1>Dharel Khin<br>Melegrito</h1>
-        <p class="hero-role">Information Technology Student · UI/UX, Video Editing &amp; Content</p>
+        <p class="hero-role">BSIT Student · Davao del Norte State College</p>
+        <div class="interest-pills"><span>🎨 UI/UX Design</span><span>🎬 Video Editing</span><span>📱 Social Media</span><span>✍️ Content Creation</span></div>
         <p class="hero-intro">I build small, working things with HTML, CSS and JavaScript: a Filipino party game, a recipe picker, and this CV. I edit videos too. I'm in my final year of BSIT and learning React next.</p>
         <p class="hero-objective"><strong>Career objective.</strong> To grow as a UI/UX designer, video editor and content creator, and to help brands look good online through clean interfaces, strong videos and social media management.</p>
         <div class="cta-row">
           <a class="btn btn--solid" href="#skills">Run my skills</a>
           <a class="btn btn--ghost" href="#contact">Get in touch</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/dharel-khin-melegrito-1b905a447" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
       <div class="hero-art">
         <figure class="hero-photo" data-initials="DK">
-          <!-- Save your profile picture as photo.jpg next to index.html -->
-          <img src="photo.jpg" alt="Portrait of Dharel Khin Melegrito">
+          
+          <img src="certificates/profile.jpg" alt="Portrait of Dharel Khin Melegrito">
         </figure>
-        <span class="chip c1">HTML</span><span class="chip c2">CSS</span><span class="chip c3">JavaScript</span><span class="chip c4">learning React</span>
+        <span class="sticker s1" aria-hidden="true">🎨</span><span class="sticker s2" aria-hidden="true">🎬</span><span class="sticker s3" aria-hidden="true">💻</span><span class="sticker s4" aria-hidden="true">✨</span><span class="hi-bubble" aria-hidden="true">Hi! 👋</span>
+        <div class="hero-card"><b>4th year</b><span>BSIT · Sto. Tomas, Davao del Norte</span></div>
       </div>
     </section>
-
-    <!-- Basic information -->
-    <dl class="facts reveal">
-      <div class="fact"><dt>Location</dt><dd>Sto. Tomas, Davao del Norte</dd></div>
-      <div class="fact"><dt>Email</dt><dd><a href="mailto:dharelkhinmelegrito@gmail.com">dharelkhinmelegrito@gmail.com</a></dd></div>
-      <div class="fact"><dt>Year level</dt><dd><span data-count="4">4</span>th-year BSIT</dd></div>
-      <div class="fact"><dt>Contact no.</dt><dd><a href="tel:+639855395512">0985 539 5512</a></dd></div>
-    </dl>
 
     <section class="two-col reveal" id="about">
       <article class="card">
@@ -113,24 +108,42 @@
     <!-- Projects -->
     <section id="projects" class="reveal">
       <h2 class="section-title">Projects</h2>
-      <p class="section-sub">Three things I've built. The last one is this page.</p>
+      <p class="section-sub">Things I've built and put online. Every preview below is the live site.</p>
       <div class="projects-grid" id="projectsGrid">
         <article class="project-card">
-          <figure class="project-shot" style="--cover: var(--c-coral);"><span class="cover-emoji" aria-hidden="true">🎲</span><iframe class="live-preview" src="https://alin-ang-pipiliin-mo.vercel.app/" title="Live preview of Alin Ang Pipiliin Mo" loading="lazy" tabindex="-1" scrolling="no"></iframe></figure>
+          <figure class="project-shot" style="--cover: var(--c-sunny);"><span class="cover-emoji" aria-hidden="true">🚌</span><iframe class="live-preview" src="https://fare-terminal-omega.vercel.app/" title="Live preview of Pasahero Fare Estimator" loading="lazy" tabindex="-1" scrolling="no"></iframe></figure>
+          <div class="project-body">
+            <h3>Pasahero Fare Estimator</h3>
+            <p class="body-text small">A fare estimator for commuters: enter your trip and get an estimated fare.</p>
+            <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">Web app</span></div>
+            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/Pasahero-Fare-Estimator" target="_blank" rel="noopener">GitHub</a><a class="project-link" href="https://fare-terminal-omega.vercel.app/" target="_blank" rel="noopener">Live demo</a></div>
+          </div>
+        </article>
+        <article class="project-card">
+          <figure class="project-shot" style="--cover: var(--c-sky);"><span class="cover-emoji" aria-hidden="true">🧾</span><iframe class="live-preview" src="https://pos-kiosk-nu.vercel.app/" title="Live preview of IT415 POS Kiosk" loading="lazy" tabindex="-1" scrolling="no"></iframe></figure>
+          <div class="project-body">
+            <h3>IT415 POS Kiosk</h3>
+            <p class="body-text small">A point-of-sale kiosk interface built for my IT415 class.</p>
+            <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">UI</span></div>
+            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/IT415-pos-kiosk" target="_blank" rel="noopener">GitHub</a><a class="project-link" href="https://pos-kiosk-nu.vercel.app/" target="_blank" rel="noopener">Live demo</a></div>
+          </div>
+        </article>
+        <article class="project-card">
+          <figure class="project-shot" style="--cover: var(--c-grass);"><span class="cover-emoji" aria-hidden="true">🍲</span><iframe class="live-preview" src="https://filipino-recipe.vercel.app/" title="Live preview of Filipino Recipe" loading="lazy" tabindex="-1" scrolling="no"></iframe></figure>
+          <div class="project-body">
+            <h3>Filipino Recipe</h3>
+            <p class="body-text small">A Filipino recipe app with search, filters and favorites.</p>
+            <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">JSON</span></div>
+            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/Filipino-Recipe" target="_blank" rel="noopener">GitHub</a><a class="project-link" href="https://filipino-recipe.vercel.app/" target="_blank" rel="noopener">Live demo</a></div>
+          </div>
+        </article>
+        <article class="project-card">
+          <figure class="project-shot" style="--cover: var(--c-coral);"><span class="cover-emoji" aria-hidden="true">🎲</span><iframe class="live-preview" src="https://alin-ang-pipiliin-mo.vercel.app/" title="Live preview of Alin Ang Pipiliin Mo?" loading="lazy" tabindex="-1" scrolling="no"></iframe></figure>
           <div class="project-body">
             <h3>Alin Ang Pipiliin Mo?</h3>
             <p class="body-text small">A Filipino "would you rather" game with a hidden bonus round and a reaction for every choice.</p>
             <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">Game</span></div>
-            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/Alin-ang-pipiliin-mo-" data-hide-if-empty>GitHub</a><a class="project-link" href="https://alin-ang-pipiliin-mo.vercel.app/" data-hide-if-empty>Live demo</a></div>
-          </div>
-        </article>
-        <article class="project-card">
-          <figure class="project-shot" style="--cover: var(--c-sky);"><span class="cover-emoji" aria-hidden="true">🍲</span><img src="screenshots/anong-lutuin-ngayon.png" alt="Screenshot of the Anong Lutuin Ngayon recipe picker" loading="lazy"></figure>
-          <div class="project-body">
-            <h3>Anong Lutuin Ngayon?</h3>
-            <p class="body-text small">A random Pinoy recipe picker with search, filters and favorites, built on my own JSON dataset.</p>
-            <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">JSON</span></div>
-            <div class="project-links"><a class="project-link" href="#" data-hide-if-empty>GitHub</a><a class="project-link" href="#" data-hide-if-empty>Live demo</a></div>
+            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/Alin-ang-pipiliin-mo-" target="_blank" rel="noopener">GitHub</a><a class="project-link" href="https://alin-ang-pipiliin-mo.vercel.app/" target="_blank" rel="noopener">Live demo</a></div>
           </div>
         </article>
         <article class="project-card">
@@ -139,7 +152,7 @@
             <h3>This CV site</h3>
             <p class="body-text small">You're looking at it. Built to prove the skills above, not just list them.</p>
             <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span></div>
-            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/digital-resume" data-hide-if-empty>GitHub</a><a class="project-link" href="#" data-hide-if-empty>Live demo</a></div>
+            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/digital-resume" target="_blank" rel="noopener">GitHub</a></div>
           </div>
         </article>
       </div>
@@ -167,42 +180,39 @@
       </article>
     </section>
 
-  <!-- Certifications -->
-  <section id="certifications" class="reveal">
-    <h2 class="section-title">Achievements &amp; certifications</h2>
-    <ul class="cert-list" id="certList">
-      <li class="cert-item">
-        <a class="cert-thumb" href="certificates/cert-ccna.jpg" target="_blank" rel="noopener"><img
-            src="certificates/cert-ccna.jpg" alt="CCNA: Introduction to Networks certificate" loading="lazy"></a>
-        <div class="cert-info"><span class="cert-name">CCNA: Introduction to Networks</span><span
-            class="cert-issuer">Cisco Networking Academy via Davao del Norte State College</span><span
-            class="cert-year">Completed 9 June 2025</span></div>
-      </li>
-      <li class="cert-item">
-        <a class="cert-thumb" href="certificates/cert-ai-seminar.jpg" target="_blank" rel="noopener"><img
-            src="certificates/cert-ai-seminar.jpg" alt="Certificate of completion for the BSIT 413 AI seminar"
-            loading="lazy"></a>
-        <div class="cert-info"><span class="cert-name">BSIT 413 Series Training: AI for Innovation of Capstone
-            Project</span><span class="cert-issuer">Institute of Computing, Davao del Norte State College</span><span
-            class="cert-year">28–29 September 2026</span></div>
-      </li>
-      <li class="cert-item">
-        <a class="cert-thumb" href="certificates/cert-nstp.jpg" target="_blank" rel="noopener"><img
-            src="certificates/cert-nstp.jpg" alt="National Service Training Program pledge, DNSC-NSTP Graduate 2024"
-            loading="lazy"></a>
-        <div class="cert-info"><span class="cert-name">National Service Training Program (NSTP) Graduate</span><span
-            class="cert-issuer">NSTP-Reserved Corps, Davao del Norte State College</span><span class="cert-year">Graduate
-            2024</span></div>
-      </li>
-   
-    </ul>
-  </section>
+    <!-- Certifications -->
+    <section id="certifications" class="reveal">
+      <h2 class="section-title">Achievements &amp; certifications</h2>
+      <ul class="cert-list" id="certList">
+        <li class="cert-item">
+          <a class="cert-thumb" href="certificates/cert-ccna.jpg" target="_blank" rel="noopener"><img src="certificates/cert-ccna.jpg" alt="CCNA: Introduction to Networks certificate" loading="lazy"></a>
+          <div class="cert-info"><span class="cert-name">CCNA: Introduction to Networks</span><span class="cert-issuer">Cisco Networking Academy via Davao del Norte State College</span><span class="cert-year">Completed 9 June 2025</span></div>
+        </li>
+        <li class="cert-item">
+          <a class="cert-thumb" href="certificates/cert-ai-seminar.jpg" target="_blank" rel="noopener"><img src="certificates/cert-ai-seminar.jpg" alt="Certificate of completion for the BSIT 413 AI seminar" loading="lazy"></a>
+          <div class="cert-info"><span class="cert-name">BSIT 413 Series Training: AI for Innovation of Capstone Project</span><span class="cert-issuer">Institute of Computing, Davao del Norte State College</span><span class="cert-year">28–29 September 2026</span></div>
+        </li>
+        <li class="cert-item">
+          <a class="cert-thumb" href="certificates/cert-nstp.jpg" target="_blank" rel="noopener"><img src="certificates/cert-nstp.jpg" alt="National Service Training Program pledge, DNSC-NSTP Graduate 2024" loading="lazy"></a>
+          <div class="cert-info"><span class="cert-name">National Service Training Program (NSTP) Graduate</span><span class="cert-issuer">NSTP-Reserved Corps, Davao del Norte State College</span><span class="cert-year">Graduate 2024</span></div>
+        </li>
+        <li class="cert-item cert-item--text">
+          <div class="cert-info"><span class="cert-name">Responsive Web Design</span><span class="cert-issuer">freeCodeCamp</span><span class="cert-year">2025</span></div>
+          <a class="cert-verify" href="#" target="_blank" rel="noopener">Verify</a>
+        </li>
+        <li class="cert-item cert-item--text">
+          <div class="cert-info"><span class="cert-name">JavaScript Algorithms and Data Structures</span><span class="cert-issuer">freeCodeCamp</span><span class="cert-year">2025</span></div>
+          <a class="cert-verify" href="#" target="_blank" rel="noopener">Verify</a>
+        </li>
+      </ul>
+    </section>
 
     <!-- Contact + social -->
     <section class="contact reveal" id="contact">
       <div>
         <h2 class="contact-title">Let's talk</h2>
         <p class="contact-text">Got a project, a question, or just want to say hi? Send a message or find me here.</p>
+        <ul class="contact-details"><li>📍 Sto. Tomas, Davao del Norte</li><li>✉️ <a href="mailto:dharelkhinmelegrito@gmail.com">dharelkhinmelegrito@gmail.com</a></li><li>📞 <a href="tel:+639855395512">0985 539 5512</a></li><li>💼 <a href="https://www.linkedin.com/in/dharel-khin-melegrito-1b905a447" target="_blank" rel="noopener">LinkedIn: dharel-khin-melegrito</a></li></ul>
         <div class="contact-pills">
           <a class="pill" href="https://github.com/IcedToffe">GitHub</a>
           <a class="pill" href="https://www.linkedin.com/in/dharel-khin-melegrito-1b905a447" target="_blank" rel="noopener">LinkedIn</a>
