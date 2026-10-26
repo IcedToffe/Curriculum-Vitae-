@@ -554,3 +554,17 @@ const fitPreviews = () => document.querySelectorAll(".live-preview").forEach((f)
 fitPreviews();
 window.addEventListener("resize", fitPreviews);
 window.addEventListener("load", fitPreviews);
+
+// ---------- Viewfinder timecode (hero REC counter, 24fps) ----------
+(() => {
+  const el = document.querySelector(".rec time");
+  if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const t0 = performance.now();
+  const pad = (n) => String(n).padStart(2, "0");
+  setInterval(() => {
+    if (document.hidden) return;
+    const sec = (performance.now() - t0) / 1000;
+    const s = Math.floor(sec), f = Math.floor((sec - s) * 24);
+    el.textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}:${pad(f)}`;
+  }, 42);
+})();
