@@ -457,9 +457,17 @@ document.querySelectorAll("a[data-hide-if-empty]").forEach((link) => {
 // ---------- Hero photo: fall back to initials if photo.jpg is missing ----------
 const heroImg = document.querySelector(".hero-photo img");
 if (heroImg) {
-  const dropPhoto = () => heroImg.remove();
-  heroImg.addEventListener("error", dropPhoto);
-  if (heroImg.complete && heroImg.naturalWidth === 0) dropPhoto();
+  // Tries the likely folders and file names, so the photo shows even if the name differs a bit.
+  const folders = ["certificates/", "certificate/", ""];
+  const files = ["profile.jpg", "profile.png", "profile.jpeg", "profile.webp", "Profile.jpg", "Profile.png", "profile pic.png", "profile pic.jpg"];
+  const paths = folders.flatMap((d) => files.map((f) => d + encodeURIComponent(f)));
+  let i = 0;
+  heroImg.addEventListener("error", () => {
+    i++;
+    if (i < paths.length) heroImg.src = paths[i];
+    else heroImg.remove(); // shows initials
+  });
+  heroImg.src = paths[0];
 }
 
 // ---------- Highlight the current section in the nav ----------
