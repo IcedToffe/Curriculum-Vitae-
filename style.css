@@ -247,3 +247,15 @@ h1{font:800 clamp(3rem,8.5vw,6.2rem)/.95 var(--display);letter-spacing:-.035em;m
 .contact-details{list-style:none;padding:0;margin:0 0 1.2rem;display:grid;gap:.5rem}
 .contact-details a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 @media(max-width:700px){.chip.c1,.chip.c3{left:-4%}.chip.c2,.chip.c4{right:-4%}}
+
+/* cute hover (replaces floating chips) */
+.hero-photo{transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
+.hero-art:hover .hero-photo{transform:rotate(-3deg) scale(1.03);box-shadow:20px 20px 0 var(--tang)}
+.sticker{position:absolute;font-size:2rem;opacity:0;transform:scale(.2) rotate(-30deg);transition:transform .45s cubic-bezier(.3,1.8,.5,1),opacity .25s;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
+.s1{top:4%;left:-6%}.s2{top:30%;right:-8%}.s3{bottom:24%;left:-8%}.s4{top:-2%;right:12%}
+.hero-art:hover .sticker{opacity:1;transform:scale(1) rotate(0);animation:bob 2s ease-in-out .45s infinite}
+.hero-art:hover .s2{transition-delay:.06s}.hero-art:hover .s3{transition-delay:.12s}.hero-art:hover .s4{transition-delay:.18s}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+.hi-bubble{position:absolute;top:14%;right:-4%;padding:.4rem .9rem;border-radius:18px 18px 18px 4px;background:var(--c-sunny);color:#17142E;font:700 1rem var(--display);opacity:0;transform:translateY(10px) scale(.7);transition:.35s cubic-bezier(.3,1.8,.5,1);pointer-events:none}
+.hero-art:hover .hi-bubble{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.sticker{animation:none!important}}
