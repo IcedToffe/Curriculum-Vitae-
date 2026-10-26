@@ -1,13 +1,13 @@
 /* Dharel Khin Melegrito — CV. Ink-on-lilac paper, one tangerine accent. */
 :root{
-  --bg:#F3F2F9; --surface:#fff; --ink:#17142E; --muted:#5B5878; --line:#DCD9EC;
+  --bg:#F3F2F9; --surface:#fff; --ink:#17142E; --muted:#3E3B5C; --line:#DCD9EC;
   --violet:#5B2EE0; --violet-soft:#E8E1FF; --tang:#FF6B3D;
   --c-coral:#FFD9CC; --c-sky:#DCD3FF; --c-grass:#CDEFE3; --c-sunny:#FFEFB8;
   --r:18px; --shadow:0 1px 0 var(--line), 0 14px 30px -18px rgba(23,20,46,.35);
   --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"DM Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
 }
 [data-theme=dark]{
-  --bg:#0E0C20; --surface:#17142E; --ink:#F1EFFB; --muted:#A8A4C6; --line:#2A2650;
+  --bg:#0E0C20; --surface:#17142E; --ink:#F1EFFB; --muted:#C6C3E0; --line:#2A2650;
   --violet:#A58BFF; --violet-soft:#2A2058; --tang:#FF8A63;
   --c-coral:#4A2A28; --c-sky:#2B2560; --c-grass:#1D3F38; --c-sunny:#4A4020;
   --shadow:0 1px 0 var(--line), 0 14px 30px -18px #000;
@@ -259,3 +259,26 @@ h1{font:800 clamp(3rem,8.5vw,6.2rem)/.95 var(--display);letter-spacing:-.035em;m
 .hi-bubble{position:absolute;top:14%;right:-4%;padding:.4rem .9rem;border-radius:18px 18px 18px 4px;background:var(--c-sunny);color:#17142E;font:700 1rem var(--display);opacity:0;transform:translateY(10px) scale(.7);transition:.35s cubic-bezier(.3,1.8,.5,1);pointer-events:none}
 .hero-art:hover .hi-bubble{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.sticker{animation:none!important}}
+
+/* readability */
+.hero-role{color:color-mix(in srgb,var(--violet) 70%,var(--ink))}
+.body-text,.section-sub,.hero-objective{color:var(--muted)}
+/* primary CTA */
+.btn--lg{padding:.95rem 1.9rem;font-size:1.05rem;box-shadow:0 8px 0 -2px color-mix(in srgb,var(--tang) 60%,#000)}
+.btn--lg:hover{transform:translateY(-3px) scale(1.03)}.btn--lg:active{transform:translateY(2px);box-shadow:none}
+.btn--lg span{display:inline-block;transition:transform .2s}.btn--lg:hover span{transform:translateX(5px)}
+/* micro-interactions */
+.interest-pills span,.tag,.project-tag{transition:transform .2s,box-shadow .2s,border-color .2s,background .2s;cursor:default}
+.interest-pills span:hover,.tag:hover,.project-tag:hover{transform:translateY(-3px) scale(1.06);border-color:var(--violet);box-shadow:0 8px 16px -8px var(--violet)}
+.project-card,.cert-item{transition:transform .25s,box-shadow .25s}
+.project-card:hover{transform:translateY(-6px)}
+/* floating glass badges, always on */
+.sticker,.hi-bubble{opacity:1;pointer-events:auto;background:rgba(255,255,255,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 20px -8px rgba(23,20,46,.35)}
+.sticker{display:grid;place-items:center;width:3rem;height:3rem;border-radius:50%;font-size:1.5rem;transform:none;filter:none;animation:floaty 4s ease-in-out infinite;transition:transform .3s cubic-bezier(.3,1.8,.5,1)}
+.s2{animation-delay:-1s}.s3{animation-delay:-2s}.s4{animation-delay:-3s}
+.hi-bubble{transform:none;animation:floaty 5s ease-in-out -1.5s infinite;color:#17142E}
+.hero-art:hover .sticker{animation:floaty 4s ease-in-out infinite;transform:scale(1.2) rotate(8deg);transition-delay:0s}
+.hero-art:hover .hi-bubble{transform:none}
+[data-theme="dark"] .sticker,[data-theme="dark"] .hi-bubble{background:rgba(23,20,46,.5);border-color:rgba(255,255,255,.2);color:#fff}
+@keyframes floaty{50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){.sticker,.hi-bubble{animation:none!important}}
