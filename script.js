@@ -139,15 +139,15 @@ async function loadGitHubStats() {
 loadGitHubStats();
 
 // ---------- Easter egg ----------
-// Type "ojt" anywhere on the page (not while typing in the contact form).
+// Type "khin" anywhere on the page (not while typing in the contact form).
 
 let typedBuffer = "";
-const secretWord = "ojt";
+const secretWord = "khin";
 
 const easterToast = document.createElement("div");
 easterToast.className = "easter-toast";
 easterToast.setAttribute("role", "status");
-easterToast.textContent = "🎉 Sana all matanggap sa OJT nila! Ikaw kasama.";
+easterToast.textContent = "🎉 Nakita mo ang lihim! Salamat sa pagbisita.";
 document.body.appendChild(easterToast);
 
 window.addEventListener("keydown", (e) => {
@@ -538,3 +538,11 @@ document.querySelectorAll("[data-count]").forEach((el) => {
     if (p < 1) requestAnimationFrame(tick);
   })(t0);
 });
+
+// ---------- Live project previews: scale a 1280px-wide iframe to fit its card ----------
+const fitPreviews = () => document.querySelectorAll(".live-preview").forEach((f) => {
+  f.style.transform = `scale(${f.parentElement.clientWidth / 1280})`;
+});
+fitPreviews();
+window.addEventListener("resize", fitPreviews);
+window.addEventListener("load", fitPreviews);
