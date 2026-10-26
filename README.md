@@ -2,7 +2,7 @@
 
 A personal CV website for a 4th-year BSIT student interested in UI/UX design, video editing and content creation. Instead of a static list of skills, every skill card runs a live demo (typed HTML, CSS keyframes, a JavaScript counter, a responsive-layout slider, a git log, a bubble sort visualizer).
 
-**Live site:** https://YOUR-PROJECT.vercel.app  <!-- replace after deploying -->
+**Live site:** https://curriculum-vitae-gules-psi.vercel.app/ 
 
 ## Sections
 Personal profile · Basic information · Education · Skills · Projects · GitHub · Social links · Achievements & certifications · Experience · Contact
@@ -27,7 +27,6 @@ Open `index.html` in a browser. No build step.
 ## File structure
 ```
 index.html   style.css   script.js
-photo.jpg                (profile picture)
-assets/                  (certificate images)
+certificate/            (certificate images + profile.jpg)
 screenshots/             (project screenshots)
 ```
