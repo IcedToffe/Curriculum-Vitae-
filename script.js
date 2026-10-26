@@ -62,7 +62,7 @@ contactForm.addEventListener("submit", (e) => {
   const message = document.getElementById("cfMessage").value.trim();
   const to = contactForm.dataset.to;
 
-  const subject = encodeURIComponent(`Message from ${name} (via resume site)`);
+  const subject = encodeURIComponent(`Message from ${name} (via CV site)`);
   const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
 
   window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
@@ -74,16 +74,12 @@ contactForm.addEventListener("submit", (e) => {
 // Edit those two things in the HTML as you improve.
 
 document.querySelectorAll(".skill-level").forEach((el) => {
-  const level = Number(el.dataset.level) || 0;
-  const dots = document.createElement("span");
-  dots.className = "dots";
-  dots.setAttribute("aria-hidden", "true");
-  for (let i = 1; i <= 5; i++) {
-    const dot = document.createElement("i");
-    if (i <= level) dot.className = "on";
-    dots.appendChild(dot);
-  }
-  el.prepend(dots);
+  const pct = (Number(el.dataset.level) || 0) * 20;
+  const bar = document.createElement("span");
+  bar.className = "bar";
+  bar.setAttribute("aria-hidden", "true");
+  bar.innerHTML = `<i class="fill" style="--w:${pct}%"></i>`;
+  el.append(bar);
 });
 
 // ---------- Live GitHub stats ----------
@@ -179,7 +175,7 @@ const demoRunners = {
 };
 
 const skillLabels = {
-  html: "HTML — typed out live",
+  html: "HTML",
   css: "CSS Animation — watch it run",
   js: "JavaScript — try it yourself",
   responsive: "Responsive Design — drag the slider",
@@ -489,3 +485,56 @@ if ("IntersectionObserver" in window) {
     if (section) observer.observe(section);
   });
 }
+
+// ---------- Preloader ----------
+window.addEventListener("load", () => {
+  setTimeout(() => document.body.classList.add("ready"), 650);
+});
+setTimeout(() => document.body.classList.add("ready"), 2500); // safety net
+
+// ---------- Scroll reveal + animated skill bars ----------
+const revealEls = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach((el) => io.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add("in"));
+}
+
+// ---------- Header state + scroll progress ----------
+const header = document.querySelector(".site-header");
+const progress = document.getElementById("progress");
+function onScroll() {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+  header.classList.toggle("scrolled", scrollY > 8);
+}
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+// ---------- Mobile menu ----------
+const menuBtn = document.getElementById("menuBtn");
+const siteNav = document.getElementById("siteNav");
+menuBtn.addEventListener("click", () => {
+  const open = siteNav.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(open));
+});
+siteNav.addEventListener("click", (e) => {
+  if (e.target.closest("a")) { siteNav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); }
+});
+
+// ---------- Count-up numbers in the hero facts ----------
+document.querySelectorAll("[data-count]").forEach((el) => {
+  const end = Number(el.dataset.count);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = end; return; }
+  const t0 = performance.now();
+  (function tick(t) {
+    const p = Math.min((t - t0) / 1200, 1);
+    el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+});
