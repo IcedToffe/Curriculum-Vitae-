@@ -248,17 +248,8 @@ h1{font:800 clamp(3rem,8.5vw,6.2rem)/.95 var(--display);letter-spacing:-.035em;m
 .contact-details a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 @media(max-width:700px){.chip.c1,.chip.c3{left:-4%}.chip.c2,.chip.c4{right:-4%}}
 
-/* cute hover (replaces floating chips) */
 .hero-photo{transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
 .hero-art:hover .hero-photo{transform:rotate(-3deg) scale(1.03);box-shadow:20px 20px 0 var(--tang)}
-.sticker{position:absolute;font-size:2rem;opacity:0;transform:scale(.2) rotate(-30deg);transition:transform .45s cubic-bezier(.3,1.8,.5,1),opacity .25s;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
-.s1{top:4%;left:-6%}.s2{top:30%;right:-8%}.s3{bottom:24%;left:-8%}.s4{top:-2%;right:12%}
-.hero-art:hover .sticker{opacity:1;transform:scale(1) rotate(0);animation:bob 2s ease-in-out .45s infinite}
-.hero-art:hover .s2{transition-delay:.06s}.hero-art:hover .s3{transition-delay:.12s}.hero-art:hover .s4{transition-delay:.18s}
-@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
-.hi-bubble{position:absolute;top:14%;right:-4%;padding:.4rem .9rem;border-radius:18px 18px 18px 4px;background:var(--c-sunny);color:#17142E;font:700 1rem var(--display);opacity:0;transform:translateY(10px) scale(.7);transition:.35s cubic-bezier(.3,1.8,.5,1);pointer-events:none}
-.hero-art:hover .hi-bubble{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.sticker{animation:none!important}}
 
 /* readability */
 .hero-role{color:color-mix(in srgb,var(--violet) 70%,var(--ink))}
@@ -272,13 +263,58 @@ h1{font:800 clamp(3rem,8.5vw,6.2rem)/.95 var(--display);letter-spacing:-.035em;m
 .interest-pills span:hover,.tag:hover,.project-tag:hover{transform:translateY(-3px) scale(1.06);border-color:var(--violet);box-shadow:0 8px 16px -8px var(--violet)}
 .project-card,.cert-item{transition:transform .25s,box-shadow .25s}
 .project-card:hover{transform:translateY(-6px)}
-/* floating glass badges, always on */
-.sticker,.hi-bubble{opacity:1;pointer-events:auto;background:rgba(255,255,255,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.7);box-shadow:0 8px 20px -8px rgba(23,20,46,.35)}
-.sticker{display:grid;place-items:center;width:3rem;height:3rem;border-radius:50%;font-size:1.5rem;transform:none;filter:none;animation:floaty 4s ease-in-out infinite;transition:transform .3s cubic-bezier(.3,1.8,.5,1)}
-.s2{animation-delay:-1s}.s3{animation-delay:-2s}.s4{animation-delay:-3s}
-.hi-bubble{transform:none;animation:floaty 5s ease-in-out -1.5s infinite;color:#17142E}
-.hero-art:hover .sticker{animation:floaty 4s ease-in-out infinite;transform:scale(1.2) rotate(8deg);transition-delay:0s}
-.hero-art:hover .hi-bubble{transform:none}
-[data-theme="dark"] .sticker,[data-theme="dark"] .hi-bubble{background:rgba(23,20,46,.5);border-color:rgba(255,255,255,.2);color:#fff}
-@keyframes floaty{50%{transform:translateY(-10px)}}
-@media(prefers-reduced-motion:reduce){.sticker,.hi-bubble{animation:none!important}}
+
+/* hero extras: viewfinder + Minecraft hotbar + code tags + tool stickers (no emoji) */
+.hero-art{margin-bottom:7.6rem}
+.hero-photo{transition:transform .35s cubic-bezier(.3,1.6,.5,1),box-shadow .35s}
+.hero-art:hover .hero-photo{transform:rotate(-2deg) scale(1.02);box-shadow:18px 18px 0 var(--tang)}
+
+/* viewfinder corners + REC */
+.hero-art::before{content:"";position:absolute;inset:-16px;pointer-events:none;z-index:1;opacity:.85;
+  background:
+    linear-gradient(var(--ink),var(--ink)) top left/24px 2px,linear-gradient(var(--ink),var(--ink)) top left/2px 24px,
+    linear-gradient(var(--ink),var(--ink)) top right/24px 2px,linear-gradient(var(--ink),var(--ink)) top right/2px 24px,
+    linear-gradient(var(--ink),var(--ink)) bottom left/24px 2px,linear-gradient(var(--ink),var(--ink)) bottom left/2px 24px,
+    linear-gradient(var(--ink),var(--ink)) bottom right/24px 2px,linear-gradient(var(--ink),var(--ink)) bottom right/2px 24px;
+  background-repeat:no-repeat}
+.rec{position:absolute;z-index:2;top:-44px;left:-16px;display:flex;align-items:center;gap:.4rem;font:600 .72rem var(--mono);letter-spacing:.04em;color:var(--ink)}
+.rec i{width:.6rem;height:.6rem;border-radius:50%;background:#ff3b30;animation:recblink 1.2s steps(2,start) infinite}
+.rec time{opacity:.7}
+@keyframes recblink{50%{opacity:0}}
+
+/* code-style tags */
+.code-tag{position:absolute;z-index:2;padding:.3rem .7rem;border-radius:8px;background:var(--ink);color:var(--bg);font:600 .78rem var(--mono);white-space:nowrap;animation:float 5s ease-in-out infinite}
+.code-tag s{text-decoration:none;color:var(--tang)}
+.ct1{top:11%;left:-19%}.ct2{top:50%;right:-15%;animation-delay:-2s}
+
+/* tool stickers (tilted, like laptop stickers) */
+.tool-sticker{position:absolute;z-index:2;display:grid;place-items:center;width:3rem;height:3rem;border-radius:12px;background:#fff;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transition:transform .3s cubic-bezier(.3,1.8,.5,1)}
+.tool-sticker svg{height:1.7rem;width:auto;max-width:1.7rem}
+.ts1{top:36%;left:-9%;transform:rotate(-8deg)}
+.ts2{top:15%;right:-8%;transform:rotate(7deg)}
+.ts3{bottom:20%;right:-7%;transform:rotate(-5deg)}
+.tool-sticker:hover{transform:rotate(0) scale(1.15)}
+.tool-sticker::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);padding:.2rem .55rem;border-radius:6px;background:var(--ink);color:var(--bg);font:600 .7rem var(--mono);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.tool-sticker:hover::after{opacity:1}
+
+/* Minecraft XP bar + hotbar */
+.mc-ui{position:absolute;left:50%;top:calc(100% + 38px);transform:translateX(-50%);display:grid;justify-items:center;gap:.45rem;z-index:3}
+.xp{position:relative;width:190px;padding-top:.55rem}
+.xp-lvl{position:absolute;left:50%;top:-.7rem;transform:translateX(-50%);font:400 1.5rem/1 "VT323",var(--mono);color:#80ff20;text-shadow:-1px 0 #000,1px 0 #000,0 -1px #000,0 1px #000}
+.xp-bar{height:8px;background:#1b1b1b;border:2px solid #000;border-radius:2px;overflow:hidden}
+.xp-bar i{display:block;height:100%;width:72%;background:repeating-linear-gradient(90deg,#80ff20 0 7px,#5bd10e 7px 8px);animation:xpfill 1.4s .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes xpfill{from{width:0}}
+.hotbar{list-style:none;display:flex;gap:3px;padding:3px;margin:0;background:#1b1b1b;border:3px solid #000;border-radius:4px;box-shadow:4px 4px 0 var(--tang)}
+.slot{position:relative;width:3rem;height:3rem;display:grid;place-items:center;background:#8b8b8b;border:3px solid;border-color:#373737 #fff #fff #373737;cursor:help;outline:none}
+.slot svg{width:2rem;height:2rem;image-rendering:pixelated;transition:transform .2s cubic-bezier(.3,1.8,.5,1)}
+.slot.is-sel{outline:3px solid #fff;outline-offset:1px;z-index:1}
+.slot:hover,.slot:focus-visible{background:#a5a5a5}
+.slot:hover svg,.slot:focus-visible svg{transform:translateY(-3px) scale(1.12)}
+.mc-tip{position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);display:grid;gap:1px;padding:.3rem .6rem;background:rgba(16,0,16,.94);border:2px solid #2d0a63;box-shadow:inset 0 0 0 2px #100010;color:#fff;font:400 1.2rem/1.1 "VT323",var(--mono);white-space:nowrap;text-align:left;opacity:0;pointer-events:none;transition:opacity .15s;z-index:5}
+.mc-tip em{font-style:normal;color:#aaa}
+.slot:hover .mc-tip,.slot:focus-visible .mc-tip{opacity:1}
+
+@media(max-width:900px){.ct1{left:-6%;top:-4%}.ct2{right:-6%}}
+@media(max-width:700px){.code-tag{display:none}.ts1{left:-3%}.ts2,.ts3{right:-3%}.hero-art{margin-bottom:7rem}}
+@media(prefers-reduced-motion:reduce){.rec i,.code-tag,.xp-bar i{animation:none}.tool-sticker,.slot svg{transition:none}}
+@media print{.rec,.code-tag,.tool-sticker,.mc-ui{display:none!important}.hero-art{margin-bottom:0}.hero-art::before{display:none}}
