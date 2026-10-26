@@ -3,309 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dharel Khin Melegrito — Digital Resume</title>
-<meta name="description" content="4th year IT student looking for an online OJT. Every skill on this page is clickable — click it and it actually runs.">
-
-<!-- Open Graph tags: control how this looks when shared on Messenger, Discord, LinkedIn, etc. -->
-<meta property="og:title" content="Dharel Khin Melegrito — Digital Resume">
-<meta property="og:description" content="4th year IT student looking for an online OJT. Every skill on this page is clickable — click it and it actually runs.">
+<title>Dharel Khin Melegrito — BSIT Student & Aspiring Web Developer</title>
+<meta name="description" content="Dharel Khin Melegrito, 4th-year BSIT student at Davao del Norte State College, looking for an online OJT. Every skill on this page runs a live demo.">
+<meta property="og:title" content="Dharel Khin Melegrito — Curriculum Vitae">
+<meta property="og:description" content="4th-year BSIT student looking for an online OJT. Click any skill and it runs.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://icedtoffe.github.io/digital-resume/">
-<!-- og:image needs a real hosted image (1200x630px works best) — add one once you have a screenshot or banner -->
-
-<!-- Apply the saved theme before the page paints (prevents a light/dark flash) -->
 <script>
-  try {
-    var saved = localStorage.getItem("digital-resume:theme");
-    if (saved === "dark" || saved === "light") document.documentElement.dataset.theme = saved;
-  } catch (e) {}
+  try { var t = localStorage.getItem("digital-resume:theme"); if (t === "dark" || t === "light") document.documentElement.dataset.theme = t; } catch (e) {}
 </script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="preloader" aria-hidden="true"><span>DK</span><i></i></div>
+  <div class="progress" id="progress"></div>
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="#top" aria-label="Back to top">
-        <span class="brand-mark">DK</span>
-        <span class="brand-name">Dharel Khin</span>
-      </a>
-
+      <a class="brand" href="#top" aria-label="Back to top"><span class="brand-mark">DK</span><span class="brand-name">Dharel Khin</span></a>
       <nav class="site-nav" id="siteNav" aria-label="Page sections">
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#certifications">Certificates</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a>
+        <a href="#education">Education</a><a href="#certifications">Certificates</a><a href="#contact">Contact</a>
       </nav>
-
       <div class="header-actions">
         <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark/light theme">🌙</button>
-        <button class="icon-btn icon-btn--primary" type="button" data-print><span aria-hidden="true">⬇</span> Download PDF</button>
+        <button class="icon-btn icon-btn--primary hide-sm" type="button" data-print>Download PDF</button>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="siteNav">☰</button>
       </div>
     </div>
   </header>
 
   <main class="wrap" id="top">
 
-    <!-- ===== Hero ===== -->
+    <!-- Personal profile -->
     <section class="hero">
       <div class="hero-text">
-        <span class="status-badge" id="statusBadge" data-status="open">
-          <span class="dot"></span> Open for OJT — Aug 2026
-        </span>
-        <h1>Hi, I'm Dharel Khin Melegrito</h1>
-        <p class="hero-role">4th Year IT Student</p>
-        <p class="hero-tagline">Looking for an online OJT. Here's what I can actually do, not just a list of words.</p>
+        <span class="status-badge"><span class="dot"></span> Open for online OJT</span>
+        <h1>Dharel Khin<br>Melegrito</h1>
+        <p class="hero-role">Information Technology Student · Aspiring Web Developer</p>
+        <p class="hero-intro">I build small, working things with HTML, CSS and JavaScript: a Filipino party game, a recipe picker, and this CV. I'm in my final year of BSIT and learning React next.</p>
+        <p class="hero-objective"><strong>Career objective.</strong> To join a team as an online OJT trainee, contribute to real web projects, and grow into a front-end developer who ships clean, usable interfaces.</p>
         <div class="cta-row">
-          <a class="btn btn--solid" href="#skills">Try my skills</a>
+          <a class="btn btn--solid" href="#skills">Run my skills</a>
           <a class="btn btn--ghost" href="#contact">Get in touch</a>
         </div>
       </div>
-
       <div class="hero-art">
         <figure class="hero-photo" data-initials="DK">
-          <!-- Save your picture as photo.jpg next to index.html. If it's missing, the initials show instead. -->
-          <img src="photo.jpg" alt="Photo of Dharel Khin Melegrito">
+          <!-- Save your profile picture as photo.jpg next to index.html -->
+          <img src="photo.jpg" alt="Portrait of Dharel Khin Melegrito">
         </figure>
-        <span class="sticker-chip c1">HTML</span>
-        <span class="sticker-chip c2">CSS</span>
-        <span class="sticker-chip c3">JS</span>
-        <span class="sticker-chip c4">learning React</span>
+        <span class="chip c1">HTML</span><span class="chip c2">CSS</span><span class="chip c3">JavaScript</span><span class="chip c4">learning React</span>
       </div>
     </section>
 
-    <!-- ===== At a glance ===== -->
-    <dl class="facts">
-      <div class="fact"><dt>Year</dt><dd>4th-year IT</dd></div>
-      <div class="fact"><dt>Looking for</dt><dd>Online OJT</dd></div>
-      <div class="fact"><dt>Start date</dt><dd>August 2026</dd></div>
-      <div class="fact"><dt>Learning now</dt><dd>React</dd></div>
+    <!-- Basic information -->
+    <dl class="facts reveal">
+      <div class="fact"><dt>Location</dt><dd>Davao del Norte, PH</dd></div>
+      <div class="fact"><dt>Email</dt><dd><a href="mailto:khin@gmail.com">khin@gmail.com</a></dd></div>
+      <div class="fact"><dt>Year level</dt><dd><span data-count="4">4</span>th-year BSIT</dd></div>
+      <div class="fact"><dt>Interests</dt><dd>Front-end, UI, networking</dd></div>
     </dl>
 
-    <!-- ===== About + learning ===== -->
-    <div class="two-col">
-      <section class="card card--coral">
+    <section class="two-col reveal" id="about">
+      <article class="card">
         <h2 class="card-title">About me</h2>
-        <p class="body-text">
-          I'm a 4th-year IT student looking for an online OJT starting August 2026.
-          So far I've built a Filipino "would you rather" game, a recipe picker
-          powered by my own JSON dataset, and this site. Every skill below is
-          clickable, so you can see it run instead of taking my word for it.
-        </p>
-      </section>
-
-      <section class="card card--sky">
+        <p class="body-text">I'm a 4th-year IT student at Davao del Norte State College. I like turning an idea into something people can click. So far that's a "would you rather" game, a recipe picker powered by my own JSON dataset, and this site. I completed Cisco's CCNA: Introduction to Networks, so I understand what happens between the browser and the server too.</p>
+      </article>
+      <article class="card card--accent">
         <h2 class="card-title">Currently learning</h2>
-        <p class="body-text">
-          I'm working through <strong>React</strong> right now, because I want to
-          understand how bigger apps get built once a project outgrows plain
-          HTML/CSS/JS. I don't know everything yet but I know how to learn,
-          and this whole site is proof of that.
-        </p>
-      </section>
-    </div>
+        <p class="body-text">React, to understand how bigger apps are structured once a project outgrows plain HTML, CSS and JS. I don't know everything yet, but I know how to learn, and this site is the proof.</p>
+      </article>
+    </section>
 
-    <!-- ===== Skills ===== -->
-    <section id="skills">
-      <h2 class="section-title">Skills — click one</h2>
-      <p class="section-sub">Each card runs a real, working demo right on this page. The dots are my honest self-rating.</p>
-
+    <!-- Skills -->
+    <section id="skills" class="reveal">
+      <h2 class="section-title">Skills you can run</h2>
+      <p class="section-sub">Pick a card to see a live demo. The bar is my honest self-rating.</p>
       <div class="skills-grid" id="skillsGrid">
-        <button class="skill-card" type="button" data-skill="html" data-accent="coral">
-          <span class="skill-name">HTML</span>
-          <span class="skill-level" data-level="4">Comfortable</span>
-          <span class="skill-cta">Run demo →</span>
-        </button>
-
-        <button class="skill-card" type="button" data-skill="css" data-accent="sky">
-          <span class="skill-name">CSS Animation</span>
-          <span class="skill-level" data-level="3">Getting there</span>
-          <span class="skill-cta">Run demo →</span>
-        </button>
-
-        <button class="skill-card" type="button" data-skill="js" data-accent="sunny">
-          <span class="skill-name">JavaScript</span>
-          <span class="skill-level" data-level="3">Getting there</span>
-          <span class="skill-cta">Run demo →</span>
-        </button>
-
-        <button class="skill-card" type="button" data-skill="responsive" data-accent="grass">
-          <span class="skill-name">Responsive Design</span>
-          <span class="skill-level" data-level="4">Comfortable</span>
-          <span class="skill-cta">Run demo →</span>
-        </button>
-
-        <button class="skill-card" type="button" data-skill="git" data-accent="coral">
-          <span class="skill-name">Git &amp; GitHub</span>
-          <span class="skill-level" data-level="3">Getting there</span>
-          <span class="skill-cta">Run demo →</span>
-        </button>
-
-        <button class="skill-card" type="button" data-skill="sort" data-accent="sky">
-          <span class="skill-name">Problem Solving</span>
-          <span class="skill-level" data-level="3">Getting there</span>
-          <span class="skill-cta">Run demo →</span>
-        </button>
+        <button class="skill-card" type="button" data-skill="html" data-accent="coral"><span class="skill-name">HTML</span><span class="skill-level" data-level="4">Comfortable</span><span class="skill-cta">Run demo</span></button>
+        <button class="skill-card" type="button" data-skill="css" data-accent="sky"><span class="skill-name">CSS Animation</span><span class="skill-level" data-level="3">Getting there</span><span class="skill-cta">Run demo</span></button>
+        <button class="skill-card" type="button" data-skill="js" data-accent="sunny"><span class="skill-name">JavaScript</span><span class="skill-level" data-level="3">Getting there</span><span class="skill-cta">Run demo</span></button>
+        <button class="skill-card" type="button" data-skill="responsive" data-accent="grass"><span class="skill-name">Responsive Design</span><span class="skill-level" data-level="4">Comfortable</span><span class="skill-cta">Run demo</span></button>
+        <button class="skill-card" type="button" data-skill="git" data-accent="coral"><span class="skill-name">Git &amp; GitHub</span><span class="skill-level" data-level="3">Getting there</span><span class="skill-cta">Run demo</span></button>
+        <button class="skill-card" type="button" data-skill="sort" data-accent="sky"><span class="skill-name">Problem Solving</span><span class="skill-level" data-level="3">Getting there</span><span class="skill-cta">Run demo</span></button>
       </div>
-
+      <p class="tag-row"><span class="tag">Networking basics (CCNA 1)</span><span class="tag">JSON data</span><span class="tag">Teamwork</span><span class="tag">Communication</span><span class="tag">Quick learner</span></p>
       <div class="demo-panel" id="demoPanel" hidden>
-        <div class="demo-header">
-          <span class="demo-lights" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="demo-title" id="demoTitle">Try it</span>
-          <button id="closeDemo" type="button" aria-label="Close">✕</button>
-        </div>
+        <div class="demo-header"><span class="demo-lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="demo-title" id="demoTitle">Try it</span><button id="closeDemo" type="button" aria-label="Close demo">✕</button></div>
         <div class="demo-body" id="demoBody"></div>
       </div>
     </section>
 
-    <!-- ===== GitHub ===== -->
-    <section class="card github-card" id="githubStats" data-username="IcedToffe">
+    <!-- GitHub -->
+    <section class="card github-card reveal" id="githubStats" data-username="IcedToffe">
       <div>
-        <h2 class="card-title">GitHub Activity</h2>
+        <h2 class="card-title">GitHub</h2>
         <p class="github-status" id="githubStatus">Loading data from GitHub…</p>
+        <a class="project-link" href="https://github.com/IcedToffe">github.com/IcedToffe</a>
       </div>
       <div>
-        <div class="github-skeleton" id="githubSkeleton">
-          <div class="skeleton-block"></div>
-          <div class="skeleton-block"></div>
-          <div class="skeleton-block"></div>
-        </div>
+        <div class="github-skeleton" id="githubSkeleton"><div class="skeleton-block"></div><div class="skeleton-block"></div><div class="skeleton-block"></div></div>
         <div class="github-grid" id="githubGrid" hidden></div>
       </div>
     </section>
 
-    <!-- ===== Projects ===== -->
-    <section id="projects">
+    <!-- Projects -->
+    <section id="projects" class="reveal">
       <h2 class="section-title">Projects</h2>
       <p class="section-sub">Three things I've built. The last one is this page.</p>
-
       <div class="projects-grid" id="projectsGrid">
         <article class="project-card">
-          <figure class="project-shot" style="--cover: var(--coral);">
-            <span class="cover-emoji" aria-hidden="true">🎲</span>
-            <img src="screenshots/alin-ang-pipiliin-mo.png" alt="Screenshot of the Alin Ang Pipiliin Mo game" loading="lazy">
-          </figure>
+          <figure class="project-shot" style="--cover: var(--c-coral);"><span class="cover-emoji" aria-hidden="true">🎲</span><img src="screenshots/alin-ang-pipiliin-mo.png" alt="Screenshot of the Alin Ang Pipiliin Mo game" loading="lazy"></figure>
           <div class="project-body">
             <h3>Alin Ang Pipiliin Mo?</h3>
-            <p class="body-text small">A Filipino "would you rather" game with a hidden bonus round and reactions for every choice.</p>
-            <div class="project-tags">
-              <span class="project-tag">JavaScript</span>
-              <span class="project-tag">Game</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link" href="https://github.com/IcedToffe/Alin-ang-pipiliin-mo-" data-hide-if-empty>View on GitHub →</a>
-              <a class="project-link" href="https://alin-ang-pipiliin-mo.vercel.app/" data-hide-if-empty>Live demo →</a>
-            </div>
+            <p class="body-text small">A Filipino "would you rather" game with a hidden bonus round and a reaction for every choice.</p>
+            <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">Game</span></div>
+            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/Alin-ang-pipiliin-mo-" data-hide-if-empty>GitHub</a><a class="project-link" href="https://alin-ang-pipiliin-mo.vercel.app/" data-hide-if-empty>Live demo</a></div>
           </div>
         </article>
-
         <article class="project-card">
-          <figure class="project-shot" style="--cover: var(--sky);">
-            <span class="cover-emoji" aria-hidden="true">🍲</span>
-            <img src="screenshots/anong-lutuin-ngayon.png" alt="Screenshot of the Anong Lutuin Ngayon recipe picker" loading="lazy">
-          </figure>
+          <figure class="project-shot" style="--cover: var(--c-sky);"><span class="cover-emoji" aria-hidden="true">🍲</span><img src="screenshots/anong-lutuin-ngayon.png" alt="Screenshot of the Anong Lutuin Ngayon recipe picker" loading="lazy"></figure>
           <div class="project-body">
             <h3>Anong Lutuin Ngayon?</h3>
-            <p class="body-text small">A random Pinoy recipe picker with search, filters, and favorites — from my own JSON dataset.</p>
-            <div class="project-tags">
-              <span class="project-tag">JavaScript</span>
-              <span class="project-tag">JSON</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link" href="#" data-hide-if-empty>View on GitHub →</a>
-              <a class="project-link" href="#" data-hide-if-empty>Live demo →</a>
-            </div>
+            <p class="body-text small">A random Pinoy recipe picker with search, filters and favorites, built on my own JSON dataset.</p>
+            <div class="project-tags"><span class="project-tag">JavaScript</span><span class="project-tag">JSON</span></div>
+            <div class="project-links"><a class="project-link" href="#" data-hide-if-empty>GitHub</a><a class="project-link" href="#" data-hide-if-empty>Live demo</a></div>
           </div>
         </article>
-
         <article class="project-card">
-          <figure class="project-shot" style="--cover: var(--grass);">
-            <span class="cover-emoji" aria-hidden="true">📓</span>
-            <img src="screenshots/this-site.png" alt="Screenshot of this digital resume site" loading="lazy">
-          </figure>
+          <figure class="project-shot" style="--cover: var(--c-grass);"><span class="cover-emoji" aria-hidden="true">📓</span><img src="screenshots/this-site.png" alt="Screenshot of this CV site" loading="lazy"></figure>
           <div class="project-body">
-            <h3>This site</h3>
+            <h3>This CV site</h3>
             <p class="body-text small">You're looking at it. Built to prove the skills above, not just list them.</p>
-            <div class="project-tags">
-              <span class="project-tag">HTML</span>
-              <span class="project-tag">CSS</span>
-              <span class="project-tag">JavaScript</span>
-            </div>
-            <div class="project-links">
-              <a class="project-link" href="https://github.com/IcedToffe/digital-resume" data-hide-if-empty>View on GitHub →</a>
-              <a class="project-link" href="https://icedtoffe.github.io/digital-resume/" data-hide-if-empty>Live demo →</a>
-            </div>
+            <div class="project-tags"><span class="project-tag">HTML</span><span class="project-tag">CSS</span><span class="project-tag">JavaScript</span></div>
+            <div class="project-links"><a class="project-link" href="https://github.com/IcedToffe/digital-resume" data-hide-if-empty>GitHub</a><a class="project-link" href="#" data-hide-if-empty>Live demo</a></div>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- ===== Certifications ===== -->
-    <section id="certifications">
-      <h2 class="section-title">Certifications</h2>
+    <!-- Education + experience -->
+    <section id="education" class="two-col reveal">
+      <article class="card">
+        <h2 class="card-title">Education</h2>
+        <ol class="timeline">
+          <li><span class="when">2022 – present</span><strong>Bachelor of Science in Information Technology</strong><span>Davao del Norte State College, Institute of Computing</span><span>Currently 4th year</span></li>
+        </ol>
+      </article>
+      <article class="card">
+        <h2 class="card-title">Experience</h2>
+        <p class="body-text small">No work history yet, which is why I'm looking for an OJT. What I have instead:</p>
+        <ol class="timeline">
+          <li><span class="when">2025 – 2026</span><strong>Academic &amp; personal projects</strong><span>A browser game, a recipe picker and this CV, all on GitHub.</span></li>
+          <li><span class="when">Sep 2026</span><strong>Capstone training participant</strong><span>Two-day seminar series for BSIT 4th-year students.</span></li>
+        </ol>
+      </article>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" class="reveal">
+      <h2 class="section-title">Achievements &amp; certifications</h2>
       <ul class="cert-list" id="certList">
         <li class="cert-item">
-          <div class="cert-info">
-            <span class="cert-name">Responsive Web Design</span>
-            <span class="cert-issuer">freeCodeCamp</span>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">2025</span>
-            <!-- Paste your real certificate link in href. If it stays "#", the Verify link hides itself. -->
-            <a class="cert-verify" href="#" target="_blank" rel="noopener">Verify</a>
-          </div>
+          <a class="cert-thumb" href="assets/cert-ccna.jpg" target="_blank" rel="noopener"><img src="assets/cert-ccna.jpg" alt="CCNA: Introduction to Networks certificate" loading="lazy"></a>
+          <div class="cert-info"><span class="cert-name">CCNA: Introduction to Networks</span><span class="cert-issuer">Cisco Networking Academy via Davao del Norte State College</span><span class="cert-year">Completed 9 June 2025</span></div>
         </li>
         <li class="cert-item">
-          <div class="cert-info">
-            <span class="cert-name">JavaScript Algorithms and Data Structures</span>
-            <span class="cert-issuer">freeCodeCamp</span>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">2025</span>
-            <a class="cert-verify" href="#" target="_blank" rel="noopener">Verify</a>
-          </div>
+          <a class="cert-thumb" href="assets/cert-ai-seminar.jpg" target="_blank" rel="noopener"><img src="assets/cert-ai-seminar.jpg" alt="Certificate of completion for the BSIT 413 AI seminar" loading="lazy"></a>
+          <div class="cert-info"><span class="cert-name">BSIT 413 Series Training: AI for Innovation of Capstone Project</span><span class="cert-issuer">Institute of Computing, Davao del Norte State College</span><span class="cert-year">28–29 September 2026</span></div>
+        </li>
+        <li class="cert-item cert-item--text">
+          <div class="cert-info"><span class="cert-name">Responsive Web Design</span><span class="cert-issuer">freeCodeCamp</span><span class="cert-year">2025</span></div>
+          <a class="cert-verify" href="#" target="_blank" rel="noopener">Verify</a>
+        </li>
+        <li class="cert-item cert-item--text">
+          <div class="cert-info"><span class="cert-name">JavaScript Algorithms and Data Structures</span><span class="cert-issuer">freeCodeCamp</span><span class="cert-year">2025</span></div>
+          <a class="cert-verify" href="#" target="_blank" rel="noopener">Verify</a>
         </li>
       </ul>
     </section>
 
-    <!-- ===== Contact ===== -->
-    <section class="contact" id="contact">
+    <!-- Contact + social -->
+    <section class="contact reveal" id="contact">
       <div>
         <h2 class="contact-title">Let's talk</h2>
-        <p class="contact-text">Got an OJT slot, a question, or just want to say hi? Send a message or reach me here.</p>
+        <p class="contact-text">Got an OJT slot, a question, or just want to say hi? Send a message or find me here.</p>
         <div class="contact-pills">
-          <a class="pill" href="https://github.com/IcedToffe">github.com/IcedToffe</a>
-          <a class="pill" href="#" data-hide-if-empty>linkedin.com/in/yourname</a>
+          <a class="pill" href="https://github.com/IcedToffe">GitHub</a>
+          <a class="pill" href="#" data-hide-if-empty>LinkedIn</a>
+          <a class="pill" href="#" data-hide-if-empty>Facebook</a>
           <button class="pill pill-btn" type="button" id="copyEmail">Copy email</button>
         </div>
       </div>
-
       <form class="contact-form" id="contactForm" data-to="khin@gmail.com">
-        <label class="form-label" for="cfName">Pangalan</label>
+        <label class="form-label" for="cfName">Your name</label>
         <input class="form-input" type="text" id="cfName" name="name" required>
-
-        <label class="form-label" for="cfEmail">Email mo</label>
+        <label class="form-label" for="cfEmail">Your email</label>
         <input class="form-input" type="email" id="cfEmail" name="email" required>
-
-        <label class="form-label" for="cfMessage">Mensahe</label>
+        <label class="form-label" for="cfMessage">Message</label>
         <textarea class="form-input" id="cfMessage" name="message" rows="4" required></textarea>
-
-        <button class="form-submit" type="submit">Ipadala</button>
-        <p class="form-note" id="formNote">Bubukas ang sarili mong email app na may pre-filled na mensahe.</p>
+        <button class="form-submit" type="submit">Send message</button>
+        <p class="form-note" id="formNote">This opens your email app with the message filled in.</p>
       </form>
     </section>
-
   </main>
 
   <footer class="site-footer">
-    <p>Built by Dharel Khin Melegrito ^_^</p>
+    <p>Built by Dharel Khin Melegrito · BSIT, Davao del Norte State College</p>
     <p class="easter-hint">psst. may lihim dito. 👀</p>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
