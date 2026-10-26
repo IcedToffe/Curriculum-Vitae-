@@ -231,3 +231,19 @@ h1{font:800 clamp(3rem,8.5vw,6.2rem)/.95 var(--display);letter-spacing:-.035em;m
 }
 
 .project-shot .live-preview{position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform-origin:0 0;pointer-events:none;background:#fff}
+
+/* hero redesign */
+.hero{position:relative}
+.hero::before{content:"";position:absolute;z-index:-1;width:520px;height:520px;right:-120px;top:-120px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--violet) 28%,transparent),transparent 70%);filter:blur(10px)}
+.hero h1{background:linear-gradient(100deg,var(--ink) 55%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.interest-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+.interest-pills span{padding:.35rem .85rem;border-radius:99px;background:var(--surface);border:1.5px solid var(--line);font:600 .88rem var(--body)}
+.hero-photo{background:linear-gradient(160deg,#fff,#e9e4ff);border:3px solid var(--ink)}
+.hero-photo::before{color:var(--violet)}
+.hero-photo img{object-position:center top}
+.hero-card{position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);width:max-content;max-width:92%;display:flex;flex-direction:column;align-items:center;padding:.55rem 1.1rem;border-radius:16px;background:var(--ink);color:var(--bg);text-align:center;font-size:.8rem}
+.hero-card b{font:800 1.1rem var(--display)}
+.chip.c4{bottom:14%}
+.contact-details{list-style:none;padding:0;margin:0 0 1.2rem;display:grid;gap:.5rem}
+.contact-details a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+@media(max-width:700px){.chip.c1,.chip.c3{left:-4%}.chip.c2,.chip.c4{right:-4%}}
